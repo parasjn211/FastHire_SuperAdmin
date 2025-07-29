@@ -1,5 +1,6 @@
 package com.fasthire.SuperAdmin.repository;
 
+import com.fasthire.SuperAdmin.dto.PlanAdditionalFeatureDTO;
 import com.fasthire.SuperAdmin.entity.SuperAdminPlanAdditionalFeature;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

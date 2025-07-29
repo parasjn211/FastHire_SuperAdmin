@@ -17,11 +17,9 @@ public class PlanDTO {
     private String planName;
     private Double mrp;
     private String employeeCount;
-    private String studentCount;
     private Long sectionId;
     private String sectionName;
     private int perEntry;
-    private int branchLimit;
     private List<SystemDTO> systems;
     private List<AdditionalFeatureDTO> additionalFeatures;
 

@@ -13,6 +13,7 @@ import com.fasthire.SuperAdmin.repository.SystemRepository;
 import com.fasthire.SuperAdmin.service.PlanSystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.fasthire.SuperAdmin.entity.SuperAdminFeature;
 
 import java.util.ArrayList;
 import java.util.List;

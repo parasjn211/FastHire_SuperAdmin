@@ -21,8 +21,5 @@ public class Employee {
     private String education;
     private String location;
 
-    @ManyToOne
-    @JoinColumn(name = "plan_id")
-    private Plan plan;
 }
 

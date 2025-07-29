@@ -9,5 +9,6 @@ public class LoginResponse {
     private String token;
     private String role;    // Optional: EMPLOYER / EMPLOYEE
     private String message;
+
 }
 

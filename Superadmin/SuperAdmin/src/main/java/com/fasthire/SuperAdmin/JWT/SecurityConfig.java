@@ -43,7 +43,7 @@ public class SecurityConfig {
                     return config;
                 })) // Add CORS configuration
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/createNewSuperAdmin", "/superadminlogin", "/institutelogin").permitAll()
+                        .requestMatchers("/auth/**", "/createNewSuperAdmin", "/superadminlogin").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

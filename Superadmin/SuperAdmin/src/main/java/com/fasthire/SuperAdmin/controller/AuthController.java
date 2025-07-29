@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "https://pjsofttech.in")
+////@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://pjsofttech.in")
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthService authService;
+    private  AuthService authService;
 
     @PostMapping("/superadminlogin")
     public ResponseEntity<LoginResponse> loginSuperAdmin(@RequestBody LoginRequest request) {
