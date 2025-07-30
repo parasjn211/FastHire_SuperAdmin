@@ -40,7 +40,7 @@ public class JwtUtil {
     // Validate Token
     public boolean validateToken(String token) {
         try {
-            JwtParser parser = Jwts.parserBuilder()
+            JwtParser parser = Jwts.parser()
                     .setSigningKey(getSigningKey())
                     .build();
 
@@ -52,7 +52,7 @@ public class JwtUtil {
     }
 
     public String extractEmail(String token) {
-        JwtParser parser = Jwts.parserBuilder()
+        JwtParser parser = Jwts.parser()
                 .setSigningKey(getSigningKey())
                 .build();
 

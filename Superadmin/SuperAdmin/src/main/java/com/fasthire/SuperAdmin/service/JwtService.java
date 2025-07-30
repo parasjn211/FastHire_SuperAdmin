@@ -3,6 +3,8 @@ package com.fasthire.SuperAdmin.service;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.JwtParser;
+
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -11,29 +13,26 @@ import java.util.Date;
 @Service
 public class JwtService {
 
+    private static final String SECRET = "superadmin-secret-key-123456789012345678901234567890"; // 256-bit key
+    private static final long EXPIRATION = 1000 * 60 * 60 * 10; // 10 hours
+
     private Key getSigningKey() {
-        // should be 256-bit
-        String SECRET = "superadmin-secret-key-123456789012345678901234567890";
-        return Keys.hmacShaKeyFor(SECRET.getBytes());
+        return Keys.hmacShaKeyFor(SECRET.getBytes()); // returns Key, not String
     }
 
     public String generateToken(String username) {
-        // 10 hours
-        long EXPIRATION = 1000 * 60 * 60 * 10;
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .subject(username)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public String extractUsername(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
+        return getParser()
+                .parseSignedClaims(token)
+                .getPayload()
                 .getSubject();
     }
 
@@ -42,13 +41,16 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token) {
-        Date expiration = Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
+        Date expiration = getParser()
+                .parseSignedClaims(token)
+                .getPayload()
                 .getExpiration();
         return expiration.before(new Date());
     }
-}
 
+    private JwtParser getParser() {
+        return Jwts.parser()
+                .setSigningKey(getSigningKey())
+                .build();
+    }
+}
