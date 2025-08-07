@@ -15,7 +15,6 @@ public interface PlanService {
     List<PlanDTO> getAllPlans();
     SuperAdminPlan updatePlan(Long id, PlanDTO planDTO);
     void deletePlan(Long id);
-    SuperAdminPlan getPlanByPlanName(String planName);
 
     SectionWithPlansDTO getPlansBySectionId(Long sectionId);
 

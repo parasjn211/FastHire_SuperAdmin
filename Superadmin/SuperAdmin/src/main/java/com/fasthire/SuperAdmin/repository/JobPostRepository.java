@@ -1,25 +1,18 @@
 package com.fasthire.SuperAdmin.repository;
 
 import com.fasthire.SuperAdmin.entity.JobPost;
-import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-@Repository
 public interface JobPostRepository extends JpaRepository<JobPost, Long> {
+    List<JobPost> findByEmployerId(Long employerId);
 
-    @Query("SELECT j FROM JobPost j WHERE j.employer.id = :employerId")
-    List<JobPost> findByEmployerId(@Param("employerId") Long employerId);
+    List<JobPost> findByCategory(String category);
 
-    @Query("SELECT j FROM JobPost j WHERE j.category = :category")
-    List<JobPost> findByCategory(@Param("category") String category);
+    List<JobPost> findByLocation(String location);
 
-    @Query("SELECT j FROM JobPost j WHERE j.location = :location")
-    List<JobPost> findByLocation(@Param("location") String location);
-
-    @Query("SELECT j FROM JobPost j WHERE j.title LIKE %:keyword% OR j.description LIKE %:keyword%")
-    List<JobPost> searchByTitleOrDescription(@Param("keyword") String keyword);
+    @Query("SELECT j FROM JobPost j WHERE LOWER(j.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(j.description) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<JobPost> searchByTitleOrDescription(String keyword);
 }
-

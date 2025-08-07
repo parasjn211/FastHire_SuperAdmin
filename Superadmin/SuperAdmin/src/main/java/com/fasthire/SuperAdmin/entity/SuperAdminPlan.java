@@ -23,7 +23,7 @@ public class SuperAdminPlan {
     private Double mrp;
     private String employeeCount;
     private String employerCount;
-
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "section_id", nullable = false)

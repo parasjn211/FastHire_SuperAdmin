@@ -51,10 +51,7 @@ public class PlanController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/PlanByName")
-    public ResponseEntity<SuperAdminPlan> getPlanByName(@RequestParam String planName) {
-        return ResponseEntity.ok(planService.getPlanByPlanName(planName));
-    }
+
 
 
 //    @GetMapping("/{planId}/features")

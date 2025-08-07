@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface SubscriptionHistoryRepository extends JpaRepository<SubscriptionHistoryRepository,Long> {
+public interface SubscriptionHistoryRepository extends JpaRepository<SuperAdminSection,Long> {
 }

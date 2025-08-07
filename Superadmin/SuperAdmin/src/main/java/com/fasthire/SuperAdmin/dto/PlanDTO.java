@@ -22,5 +22,5 @@ public class PlanDTO {
     private int perEntry;
     private List<SystemDTO> systems;
     private List<AdditionalFeatureDTO> additionalFeatures;
-
+    private String description;
 }

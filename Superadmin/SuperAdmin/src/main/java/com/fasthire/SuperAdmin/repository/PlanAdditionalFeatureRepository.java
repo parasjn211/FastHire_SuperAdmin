@@ -17,10 +17,10 @@ public interface PlanAdditionalFeatureRepository extends JpaRepository<SuperAdmi
     List<SuperAdminPlanAdditionalFeature> findByPlanId(Long planId);
 
 
-    @Query("SELECT new com.New.SuperAdminSystem.DTO.PlanAdditionalFeatureDTO(p.id, p.planName, af.id, af.name, pf.enabled) " +
+    @Query("SELECT new com.fasthire.SuperAdmin.dto.PlanAdditionalFeatureDTO(p.id, p.planName, af.id, af.name, pf.enabled) " +
             "FROM SuperAdminPlanAdditionalFeature pf " +
-            "JOIN pf.plan p " +  // Join SuperAdminPlan
-            "JOIN pf.feature af " +  // Join SuperAdminAdditionalFeature
+            "JOIN pf.plan p " +
+            "JOIN pf.feature af " +
             "WHERE p.id = :planId")
     List<PlanAdditionalFeatureDTO> findFeaturesByPlanId(@Param("planId") Long planId);
 
