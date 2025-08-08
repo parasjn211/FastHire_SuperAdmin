@@ -1,12 +1,16 @@
 package com.fasthire.SuperAdmin.serviceimpl;
 
 
+import com.fasthire.SuperAdmin.dto.SuperAdminRegisterRequest;
 import com.fasthire.SuperAdmin.entity.SuperAdmin;
 import com.fasthire.SuperAdmin.repository.SuperAdminRepository;
 import com.fasthire.SuperAdmin.service.SuperAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -17,7 +21,39 @@ public class NewSuperAdminServiceImpl implements SuperAdminService {
     private SuperAdminRepository newSuperAdminRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private  PasswordEncoder passwordEncoder;
+
+    @Override
+    public SuperAdmin registerSuperAdmin(SuperAdminRegisterRequest request) {
+        if (request == null) {
+            throw new IllegalArgumentException("Registration request must not be null");
+        }
+
+        // check if email already exists
+        Optional<SuperAdmin> existing = newSuperAdminRepository.findByEmailAddress(request.getEmailAddress());
+        if (existing.isPresent()) {
+            throw new RuntimeException("Email already registered: " + request.getEmailAddress());
+        }
+
+        // map DTO -> entity
+        SuperAdmin admin = new SuperAdmin();
+        admin.setEmailAddress(request.getEmailAddress());
+        admin.setPhoneNumber(request.getPhoneNumber());
+        // encode password
+        admin.setPassword(passwordEncoder.encode(request.getPassword()));
+        admin.setAdminName(request.getAdminName());
+        admin.setMobileNumber(request.getMobileNumber());
+        admin.setAddress(request.getAddress());
+        admin.setCity(request.getCity());
+        admin.setState(request.getState());
+        admin.setRegistrationNumber(request.getRegistrationNumber());
+        admin.setAadhar(request.getAadhar());
+        admin.setPancard(request.getPancard());
+        admin.setCountry(request.getCountry());
+
+        return newSuperAdminRepository.save(admin);
+    }
+
 
     @Override
     public SuperAdmin createNewSuperAdmin(SuperAdmin newSuperAdmin) {

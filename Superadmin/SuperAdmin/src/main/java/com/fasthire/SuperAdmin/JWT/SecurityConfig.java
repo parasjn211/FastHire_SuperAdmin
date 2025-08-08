@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,7 +34,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF
+                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF
                 .cors(cors -> cors.configurationSource(request -> {
                     var config = new org.springframework.web.cors.CorsConfiguration();
                     config.setAllowedOrigins(List.of("http://localhost:5173","https://pjsofttech.in")); // Frontend origin
@@ -43,14 +44,14 @@ public class SecurityConfig {
                     return config;
                 })) // Add CORS configuration
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/createNewSuperAdmin", "/superadminlogin").permitAll()
+                        .requestMatchers("/auth/**", "/createNewSuperAdmin", "/superadminlogin","/superadmin/register").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .httpBasic(httpBasic -> httpBasic.disable());
+                .httpBasic(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
