@@ -15,9 +15,9 @@ import java.util.Optional;
 
 public class AuthService {
 
-    private  SuperAdminRepository superAdminRepository;
-    private  PasswordEncoder passwordEncoder;
-    private JwtUtil jwtUtil;
+    private final SuperAdminRepository superAdminRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     // Login for SuperAdmin
     public LoginResponse loginSuperAdmin(LoginRequest request) {

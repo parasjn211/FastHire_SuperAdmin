@@ -28,4 +28,7 @@ public class SuperAdminSystem {
 
     @OneToMany(mappedBy = "system", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SuperAdminPlanSystem> planSystems;
+
+    public SuperAdminSystem(Long id, String name, boolean enabled) {
+    }
 }

@@ -23,4 +23,5 @@ public class SuperAdminPlanSystem {
     private SuperAdminSystem system;
 
     private boolean enabled;
+
 }

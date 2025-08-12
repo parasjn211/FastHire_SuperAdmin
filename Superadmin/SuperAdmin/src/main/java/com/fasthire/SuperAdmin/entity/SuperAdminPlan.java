@@ -33,4 +33,5 @@ public class SuperAdminPlan {
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SuperAdminPlanSystem> planSystems;
 
+
 }
