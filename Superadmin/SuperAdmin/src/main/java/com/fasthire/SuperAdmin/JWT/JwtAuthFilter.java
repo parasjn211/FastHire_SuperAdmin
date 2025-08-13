@@ -38,8 +38,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             token = authHeader.substring(7);
             try {
                 email = jwtUtil.extractEmail(token);
+                System.out.println("✅ Token received for email: " + email);
+
             } catch (Exception e) {
                 log.error("JWT parsing failed: {}", e.getMessage());
+                System.out.println("❌ No token or invalid header.");
             }
         }
 
@@ -48,6 +51,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
             if (jwtUtil.validateToken(token)) {
+
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,

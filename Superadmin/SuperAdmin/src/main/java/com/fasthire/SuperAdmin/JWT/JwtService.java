@@ -1,4 +1,4 @@
-package com.fasthire.SuperAdmin.service;
+package com.fasthire.SuperAdmin.JWT;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

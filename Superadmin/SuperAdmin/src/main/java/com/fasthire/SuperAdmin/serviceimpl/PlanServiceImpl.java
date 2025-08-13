@@ -37,14 +37,14 @@ public class PlanServiceImpl implements PlanService {
 
         // Map systems if provided
         if (plan.getPlanSystems() != null) {
-            List<SystemDTO> systemDTOS = plan.getPlanSystems().stream()
-                    .map(ps -> new SystemDTO(
-                            ps.getSystem().getId(),
-                            ps.getSystem().getSystemName(),
-                            ps.isEnabled()
-                    ))
-                    .collect(Collectors.toList());
-            dto.setSystems(systemDTOS);
+            List<SuperAdminPlanSystem> systemDTOS = plan.getPlanSystems();//.stream()
+//                    .map(ps -> new SystemDTO(
+//                            ps.getSystem().getId(),
+//                            ps.getSystem().getSystemName()
+////                            ps.isEnabled()
+//                    ))
+//                    .toList();
+            plan.setPlanSystems(systemDTOS);
         }
 
         return planRepository.save(plan);
@@ -101,7 +101,7 @@ public class PlanServiceImpl implements PlanService {
 
         if (plan.getPlanSystems() != null) {
             List<SystemDTO> systemDTOS = plan.getPlanSystems().stream()
-                    .map(ps -> new SystemDTO(ps.getId(), ps.getSystem()))
+                    .map(ps -> new SystemDTO(ps.getId(), (List)ps.getSystem()))
                     .collect(Collectors.toList());
             dto.setSystems(systemDTOS);
         }

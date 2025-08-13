@@ -7,6 +7,7 @@ import com.fasthire.SuperAdmin.entity.SuperAdminPlan;
 import com.fasthire.SuperAdmin.entity.SuperAdminPlanAdditionalFeature;
 import com.fasthire.SuperAdmin.repository.AdditionalFeatureRepository;
 import com.fasthire.SuperAdmin.repository.PlanAdditionalFeatureRepository;
+import com.fasthire.SuperAdmin.repository.PlanRepository;
 import com.fasthire.SuperAdmin.service.PlanAdditionalFeatureService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

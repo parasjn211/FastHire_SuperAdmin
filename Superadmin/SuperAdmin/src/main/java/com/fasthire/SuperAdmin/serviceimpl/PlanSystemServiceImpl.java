@@ -7,6 +7,7 @@ import com.fasthire.SuperAdmin.dto.SystemDTO;
 import com.fasthire.SuperAdmin.entity.SuperAdminPlan;
 import com.fasthire.SuperAdmin.entity.SuperAdminPlanSystem;
 import com.fasthire.SuperAdmin.entity.SuperAdminSystem;
+import com.fasthire.SuperAdmin.repository.PlanRepository;
 import com.fasthire.SuperAdmin.repository.PlanSystemRepository;
 import com.fasthire.SuperAdmin.repository.SystemRepository;
 import com.fasthire.SuperAdmin.service.PlanSystemService;
