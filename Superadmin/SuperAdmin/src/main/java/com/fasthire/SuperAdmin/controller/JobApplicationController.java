@@ -4,6 +4,7 @@ import com.fasthire.SuperAdmin.entity.JobApplication;
 import com.fasthire.SuperAdmin.service.JobApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,8 @@ public class JobApplicationController {
 
     private final JobApplicationService jobApplicationService;
 
-    // Apply to a job
+    // Only USER can apply
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/apply")
     public ResponseEntity<JobApplication> applyToJob(
             @RequestParam Long userId,
@@ -23,19 +25,22 @@ public class JobApplicationController {
         return ResponseEntity.ok(jobApplicationService.applyToJob(userId, jobPostId));
     }
 
-    // Get applications by user
+    // Only USER can view their own applications
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<JobApplication>> getApplicationsByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(jobApplicationService.getApplicationsByUser(userId));
     }
 
-    // Get applications by job post (For Employer/Admin)
+    // EMPLOYER or ADMIN can view applications for a job
+    @PreAuthorize("hasAnyRole('EMPLOYER','SUPERADMIN')")
     @GetMapping("/job/{jobPostId}")
     public ResponseEntity<List<JobApplication>> getApplicationsByJobPost(@PathVariable Long jobPostId) {
         return ResponseEntity.ok(jobApplicationService.getApplicationsByJobPost(jobPostId));
     }
 
-    // Update application status (Employer/Admin)
+    // Only EMPLOYER or ADMIN can update application status
+    @PreAuthorize("hasAnyRole('EMPLOYER','SUPERADMIN')")
     @PutMapping("/update-status/{applicationId}")
     public ResponseEntity<String> updateApplicationStatus(
             @PathVariable Long applicationId,
@@ -43,4 +48,3 @@ public class JobApplicationController {
         return ResponseEntity.ok(jobApplicationService.updateApplicationStatus(applicationId, status));
     }
 }
-

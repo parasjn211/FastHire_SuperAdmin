@@ -47,11 +47,11 @@ public class AdditonalFeatureServiceImpl implements AdditionalFeatureService
         return additionalFeatureRepository.save(existingFeature);
     }
 
-   @Override
+    @Override
     public void deleteFeature(Long id) {
         if (!additionalFeatureRepository.existsById(id)) {
             throw new RuntimeException("Feature not found with ID: " + id);
         }
-       additionalFeatureRepository.deleteById(id);
+        additionalFeatureRepository.deleteById(id);
     }
 }

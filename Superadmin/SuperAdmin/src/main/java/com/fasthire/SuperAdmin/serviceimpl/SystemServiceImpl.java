@@ -68,7 +68,7 @@ public class SystemServiceImpl implements SystemService
         return null;
     }
 
-   @Override
+    @Override
     public boolean deleteSystem(Long id) {
         if (systemRepository.existsById(id)) {
             systemRepository.deleteById(id);

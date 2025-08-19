@@ -41,7 +41,7 @@ public class SectionServiceImpl implements SectionService
             dto.setSectionName(section.getSectionName());
 
             List<PlanDTO> planDTOs = section.getSuperAdminPlans().stream().map(plan -> {
-               PlanDTO planDTO = new PlanDTO();
+                PlanDTO planDTO = new PlanDTO();
                 planDTO.setId(plan.getId());
                 planDTO.setPlanName(plan.getPlanName());
                 planDTO.setMrp(plan.getMrp());
@@ -76,4 +76,3 @@ public class SectionServiceImpl implements SectionService
 
 
 }
-

@@ -50,4 +50,3 @@ public class JobPostServiceImpl implements JobPostService {
         return jobPostRepository.searchByTitleOrDescription(keyword);
     }
 }
-

@@ -23,6 +23,9 @@ public class Employer {
 
     private boolean isApproved;
 
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_EMPLOYER;
+
     @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
     private List<JobPost> jobPosts;
 }

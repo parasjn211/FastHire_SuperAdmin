@@ -30,5 +30,8 @@ public class SuperAdmin {
     private Long aadhar;
     private String pancard;
     private String country;
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_SUPERADMIN;
+
 
 }

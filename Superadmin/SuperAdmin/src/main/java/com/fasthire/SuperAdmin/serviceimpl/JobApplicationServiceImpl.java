@@ -62,4 +62,3 @@ public class JobApplicationServiceImpl implements JobApplicationService {
         return "Application status updated to " + status;
     }
 }
-

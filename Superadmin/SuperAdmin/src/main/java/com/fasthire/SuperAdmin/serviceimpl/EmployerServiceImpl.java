@@ -44,4 +44,3 @@ public class EmployerServiceImpl implements EmployerService {
         return employerRepository.findApprovedEmployers();
     }
 }
-
